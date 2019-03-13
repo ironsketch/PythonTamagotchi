@@ -1,7 +1,7 @@
 import random
 
 class Pet:
-    def __init__(self, name, age, happy, hunger, thirst, death, time):
+    def __init__(self, name, age, happy, hunger, thirst, death, time, timeHours):
         self.name = name
         self.age = age
         self.happy = happy
@@ -10,6 +10,7 @@ class Pet:
         self.death = death
         self.dead = False
         self.time = time
+        self.timeHours = timeHours
 
     def die(self, ouch):
         self.death += ouch
@@ -104,9 +105,15 @@ class Pet:
     def getAge(self):
         return self.age
 
+    def whenYouWereGone(self, time):
+        timePassed = int((time - self.timeHours) / 3600)
+        self.feed(-timePassed)
+        self.water(-timePassed)
+        self.happiness(-timePassed)
+
     def ageUp(self, time):
         if(time - self.time > 86400):
-            self.age += int(time / self.time)
+            self.age += int((time - self.time) / 86400)
             self.time = time
             return True
         return False
@@ -118,13 +125,13 @@ class Pet:
         else:
             self.happy += amount
 
-    def save(self):
+    def save(self, time):
         saveFile = open(self.name + ".pet", 'w')
         saveFile.write(
                 self.name + " " + str(self.age) + " " +
                 str(self.hunger) + " " + str(self.thirst) + " " +
                 str(self.happy) + " " + str(self.death) + " " +
-                str(self.time))
+                str(self.time) + " " + str(time))
         saveFile.close
 
     def randomBehavior(self):

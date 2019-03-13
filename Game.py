@@ -12,13 +12,13 @@ def playGame(thePet):
             if(choice == 0):
                 sys.exit()
             if(choice == 1):
-                thePet.play(20, 10)
+                thePet.play(25, 10)
             if(choice == 2):
                 thePet.feed(20)
             if(choice == 3):
                 thePet.water(20)
             if(choice == 4):
-                thePet.punch(20)
+                thePet.punch(10)
             if(choice == 5):
                 thePet.status()
             if(thePet.die(0)):
@@ -27,21 +27,22 @@ def playGame(thePet):
             if(thePet.ageUp(int(time.time()))):
                 print("%s is now a year older! They are %d years old!" % (thePet.getName(), thePet.getAge()))
             thePet.happiness(-5)
-            thePet.save()
+            thePet.save(int(time.time()))
             print()
 
         except:
             print("That wasn't an option")
 
 def newPet(petName):
-    newPet = Pet(petName.replace(' ', '_'), 0, 50, 20, 20, 0, int(time.time()))
+    newPet = Pet(petName.replace(' ', '_'), 0, 50, 20, 20, 0, int(time.time()), int(time.time()))
     return newPet
 
 def loadPet(petName):
     petInfo = open(petName.replace(' ', '_') + ".pet", 'r')
     petList = petInfo.read()
     petList = petList.split(' ')
-    newPet = Pet(petList[0], int(petList[1]), int(petList[2]), int(petList[3]), int(petList[4]), int(petList[5]), int(petList[6]))
+    newPet = Pet(petList[0], int(petList[1]), int(petList[2]), int(petList[3]), int(petList[4]), int(petList[5]), int(petList[6]), int(petList[7]))
+    newPet.whenYouWereGone(int(time.time()))
     playGame(newPet)
 
 def main():
@@ -54,7 +55,8 @@ def main():
             petName = input("What will you name your new pet? ")
             playGame(newPet(petName))
     except:
-        print("That was an invalid choice. Shutting Down your computer.")
+        print("That was an invalid choice, did you spell your pet name wrong?")
+        main()
 
 if __name__ == "__main__":
     main()
