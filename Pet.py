@@ -60,7 +60,6 @@ class Pet:
         hidden = self.wordChange(word, hide)
         attempts = 6
         while(attempts > 0):
-            print()
             guess = input("Make a letter guess! %s You have %d guesses remaining! " % (hidden, attempts))
             if(guess in hide):
                 hide.remove(guess)
@@ -69,12 +68,10 @@ class Pet:
                 attempts -= 1
             if(not hide):
                 print("Great job! %s" % (word))
-                break
+                return True
 
-        if(attempts <= 0):
-            print("You failed! And should be ashamed... %s " % (word))
-            return False
-        return True
+        print("You failed! And should be ashamed... %s " % (word))
+        return False
 
     def play(self, game, exp):
         print()

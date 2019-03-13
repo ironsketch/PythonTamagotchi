@@ -8,7 +8,7 @@ def wordChange(word, xs):
         hidden = hidden.replace(xs[i], '_')
     return hidden
 
-def hangman():
+def game2():
     choice = random.randint(0, len(words) - 1)
     word = words[choice]
     hidden = '_' * len(word)
@@ -17,8 +17,19 @@ def hangman():
     hide.append(word[random.randint(0, len(word) - 1)])
     hide.append(word[random.randint(0, len(word) - 1)])
     hidden = wordChange(word, hide)
-    print(word)
-    print(hidden)
+    attempts = 6
+    while(attempts > 0):
+        guess = input("Make a letter guess! %s You have %d guesses remaining! " % (hidden, attempts))
+        if(guess in hide):
+            print("meow")
+            hide.remove(guess)
+            hidden = wordChange(word, hide)
+        else:
+            attempts -= 1
+        if(not hide):
+            print("Great job! %s" % (word))
+            return True
+    print("You failed! And should be ashamed... %s " % (word))
+    return False
 
-
-hangman()
+game2()
