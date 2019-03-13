@@ -21,9 +21,10 @@ def game2():
     while(attempts > 0):
         guess = input("Make a letter guess! %s You have %d guesses remaining! " % (hidden, attempts))
         if(guess in hide):
-            print("meow")
+            print("The guess was %s and the length is %d" % (guess, len(guess)))
             hide.remove(guess)
             hidden = wordChange(word, hide)
+            print(hide)
         else:
             attempts -= 1
         if(not hide):
