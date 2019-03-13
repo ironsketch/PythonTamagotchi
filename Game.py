@@ -5,7 +5,7 @@ import time
 def playGame(thePet):
     choice = 1
     while(choice != 0):
-        try:
+ #       try:
             theTime = int(time.time())
             choice = int(input("What would you like to do?\n0 Quit, 1 Play, 2 Feed, 3 Water, 4 Punch, 5 Status: "))
             thePet.randomBehavior()
@@ -28,9 +28,10 @@ def playGame(thePet):
                 print("%s is now a year older! They are %d years old!" % (thePet.getName(), thePet.getAge()))
             thePet.happiness(-5)
             thePet.save()
+            print()
 
-        except:
-            print("That wasn't an option")
+#        except:
+#            print("That wasn't an option")
 
 def newPet(petName):
     newPet = Pet(petName.replace(' ', '_'), 0, 50, 20, 20, 0, int(time.time()))
@@ -44,7 +45,7 @@ def loadPet(petName):
     playGame(newPet)
 
 def main():
-    try:
+ #   try:
         choice = int(input("Would you like to load or create a new Pet? (1, 0) "))
         if(choice):
             petName = input("What is the name of your pet? ")
@@ -52,8 +53,8 @@ def main():
         else:
             petName = input("What will you name your new pet? ")
             playGame(newPet(petName))
-    except:
-        print("That was an invalid choice. Shutting Down your computer.")
+  #  except:
+  #      print("That was an invalid choice. Shutting Down your computer.")
 
 if __name__ == "__main__":
     main()

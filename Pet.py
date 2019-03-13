@@ -33,15 +33,66 @@ class Pet:
         if(self.thirst > 100):
             self.thirst = 100
 
+    def game1(self):
+        rInt = random.randint(0, 10)
+        guess = int(input(self.name + " is thinking of a number between 0 and 10. What is it? "))
+        if(guess == rInt):
+            print("You guessed right!")
+            return True
+        print("Nope!")
+        return False
+
+    def wordChange(self, word, xs):
+        hidden = word
+        for i in range(len(xs)):
+            hidden = hidden.replace(xs[i], '_')
+        return hidden
+
+    def game2(self):
+        words = ["apple", "butter", "cat", "dog", "elephant", "future", "ghost", "history", "icing", "jump", "kill", "little", "moth", "naughty", "octopus", "peanut", "quit", "race", "simple", "terrible", "unbeatable", "very", "wild", "xenoblast", "yoda", "zap"]
+        choice = random.randint(0, len(words) - 1)
+        word = words[choice]
+        hidden = '_' * len(word)
+        hide = []
+        hide.append(word[random.randint(0, len(word) - 1)])
+        hide.append(word[random.randint(0, len(word) - 1)])
+        hide.append(word[random.randint(0, len(word) - 1)])
+        hidden = self.wordChange(word, hide)
+        attempts = 6
+        while(attempts > 0):
+            print()
+            guess = input("Make a letter guess! %s You have %d guesses remaining! " % (hidden, attempts))
+            if(guess in hide):
+                hide.remove(guess)
+                hidden = self.wordChange(word, hide)
+            else:
+                attempts -= 1
+            if(not hide):
+                print("Great job! %s" % (word))
+                break
+
+        if(attempts <= 0):
+            print("You failed! And should be ashamed... %s " % (word))
+            return False
+        return True
+
     def play(self, game, exp):
-        if(self.happy + game > 100):
-            self.happy = 100
-        else:
-            self.happy += game
-        if(self.hunger <= 0 or self.thirst <= 0):
-            self.die(5)
-        self.feed(-exp)
-        self.water(-exp)
+        print()
+        choice = int(input("Game 1 or 2? "))
+        won = False
+        if(choice == 1):
+            won = self.game1()
+        if(choice == 2):
+            won = self.game2()
+        if(won):
+            if(self.happy + game > 100):
+                self.happy = 100
+            else:
+                self.happy += game
+            if(self.hunger <= 0 or self.thirst <= 0):
+                self.die(5)
+            self.feed(-exp)
+            self.water(-exp)
 
     def punch(self, hit):
         if(not self.die(hit)):
