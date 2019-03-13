@@ -31,7 +31,7 @@ def playGame(thePet):
             print()
 
         except:
-            print("That wasn't an option")
+            print()
 
 def newPet(petName):
     newPet = Pet(petName.replace(' ', '_'), 0, 50, 20, 20, 0, int(time.time()), int(time.time()))

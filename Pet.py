@@ -60,6 +60,7 @@ class Pet:
             if(letter not in hide):
                 hide.append(letter)
         hidden = self.wordChange(word, hide)
+        letters = []
         attempts = 6
         while(attempts > 0):
             guess = input("Make a letter guess! %s You have %d guesses remaining! " % (hidden, attempts))
@@ -67,7 +68,10 @@ class Pet:
                 hide.remove(guess)
                 hidden = self.wordChange(word, hide)
             else:
+                letters.append(guess)
                 attempts -= 1
+            print("So far you have incorrectly guessed")
+            print(letters)
             if(not hide):
                 print("Great job! %s" % (word))
                 return True
