@@ -1,0 +1,57 @@
+from Pet import Pet
+import sys
+import time
+
+def playGame(thePet):
+    theTime = int(time.time())
+    choice = 1
+    while(choice != 0):
+        #try:
+            choice = int(input("What would you like to do?\n0 Quit, 1 Play, 2 Feed, 3 Water, 4 Punch, 5 Status: "))
+            if(choice == 0):
+                sys.exit()
+            if(choice == 1):
+                thePet.play(20, 10)
+            if(choice == 2):
+                thePet.feed(20)
+            if(choice == 3):
+                thePet.water(20)
+            if(choice == 4):
+                thePet.punch(20)
+            if(choice == 5):
+                thePet.status()
+            if(thePet.die(0)):
+                print("You killed your pet... you monster!!! :(")
+                sys.exit()
+            if(thePet.ageUp(int(time.time()))):
+                print("%s is now a year older! They are %d years old!" % (thePet.getName(), thePet.getAge()))
+            thePet.save()
+
+        #except:
+        #    print("That wasn't an option")
+
+def newPet(petName):
+    newPet = Pet(petName, 0, 50, 20, 20, 0, int(time.time()))
+    return newPet
+
+def loadPet(petName):
+    petInfo = open(petName + ".pet", 'r')
+    petList = petInfo.read()
+    petList = petList.split(' ')
+    newPet = Pet(petList[0], int(petList[1]), int(petList[2]), int(petList[3]), int(petList[4]), int(petList[5]), int(petList[6]))
+    playGame(newPet)
+
+def main():
+    #try:
+        choice = int(input("Would you like to load or create a new Pet? (1, 0) "))
+        if(choice):
+            petName = input("What is the name of your pet? ")
+            loadPet(petName)
+        else:
+            petName = input("What will you name your new pet? ")
+            playGame(newPet(petName))
+    #except:
+    #    print("That was an invalid choice. Shutting Down your computer.")
+
+if __name__ == "__main__":
+    main()
