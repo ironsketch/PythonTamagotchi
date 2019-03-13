@@ -54,9 +54,10 @@ class Pet:
         word = words[choice]
         hidden = '_' * len(word)
         hide = []
-        hide.append(word[random.randint(0, len(word) - 1)])
-        hide.append(word[random.randint(0, len(word) - 1)])
-        hide.append(word[random.randint(0, len(word) - 1)])
+        for i in range(3):
+            letter = word[random.randint(0, len(word) - 1)]
+            if(letter not in hide):
+                hide.append(letter)
         hidden = self.wordChange(word, hide)
         attempts = 6
         while(attempts > 0):
