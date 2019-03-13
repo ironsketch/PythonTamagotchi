@@ -79,14 +79,20 @@ class Pet:
         saveFile.close
 
     def randomBehavior(self):
-        rInt = random.randint(0, 100)
+        rInt = random.randint(0, 75)
         if(rInt == 4):
             print(self.name + " made a huge mess and trashed your home! Their happiness went up!")
             self.happy += 5
-        if(rInt == 44):
+        if(rInt == 13):
+            print("Someone picked on " + self.name + " and they cried ALL FREAKIN DAY...")
+            self.happy -= 5
+        if(rInt == 23):
             print(self.name + " fell down a well. They are fine now but they got hurt!")
             self.die(5)
-        if(rInt == 94):
+        if(rInt == 24):
+            print(self.name + " Found a pretty shell on the ground. They picked it up and then got pooped on by a crow. " + self.name + " then kept walking, feeling sad but found a 20$ bill! They decided to buy candy with it. After eating TOO much candy they threw up all over your couch.")
+            self.die(5)
+        if(rInt == 44):
             print(self.name + " found a crusty cheetoh and ate it.")
             self.feed(2)
 

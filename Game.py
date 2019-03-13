@@ -33,11 +33,11 @@ def playGame(thePet):
             print("That wasn't an option")
 
 def newPet(petName):
-    newPet = Pet(petName, 0, 50, 20, 20, 0, int(time.time()))
+    newPet = Pet(petName.replace(' ', '_'), 0, 50, 20, 20, 0, int(time.time()))
     return newPet
 
 def loadPet(petName):
-    petInfo = open(petName + ".pet", 'r')
+    petInfo = open(petName.replace(' ', '_') + ".pet", 'r')
     petList = petInfo.read()
     petList = petList.split(' ')
     newPet = Pet(petList[0], int(petList[1]), int(petList[2]), int(petList[3]), int(petList[4]), int(petList[5]), int(petList[6]))
